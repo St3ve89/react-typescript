@@ -1,6 +1,19 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { Store } from './Store';
-import './index.css';
+
+interface IEpisode {
+  id: number;
+  url: string;
+  name: string;
+  season: number;
+  number: number;
+  airdate: string;
+  airtime: string;
+  airstamp: string;
+  runtime: number;
+  summary: string;
+  image: { medium: string; original: string };
+}
 
 export default function App() {
   const { state, dispatch } = useContext(Store);
@@ -25,9 +38,11 @@ export default function App() {
 
   return (
     <Fragment>
-      <h1>Rick and Morty</h1>
-      <p>Pick your favourite episode!</p>
-      {state.episodes.map((episode: any) => (
+      <div className='header'>
+        <h1>Rick and Morty</h1>
+        <p>Pick your favourite episode!</p>
+      </div>
+      {state.episodes.map((episode: IEpisode) => (
         <div key={episode.id} className='card'>
           <img
             src={episode.image.medium}
