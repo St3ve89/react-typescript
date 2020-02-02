@@ -1,19 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { Store } from './Store';
-
-interface IEpisode {
-  id: number;
-  url: string;
-  name: string;
-  season: number;
-  number: number;
-  airdate: string;
-  airtime: string;
-  airstamp: string;
-  runtime: number;
-  summary: string;
-  image: { medium: string; original: string };
-}
+import { IEpisode, IAction } from './interfaces';
 
 export default function App() {
   const { state, dispatch } = useContext(Store);
@@ -34,6 +21,12 @@ export default function App() {
     });
   };
 
+  const toggleFavAction = (episode: IEpisode): IAction =>
+    dispatch({
+      type: 'ADD_FAV',
+      payload: episode
+    });
+
   console.log(state);
 
   return (
@@ -42,20 +35,25 @@ export default function App() {
         <h1>Rick and Morty</h1>
         <p>Pick your favourite episode!</p>
       </div>
-      {state.episodes.map((episode: IEpisode) => (
-        <div key={episode.id} className='card'>
-          <img
-            src={episode.image.medium}
-            alt={`Rick and Morty ${episode.name}`}
-          />
-          <div className='p10 flex column'>
-            <div className='card-title'>{episode.name}</div>
-            <div className='card-desc'>
-              Season: {episode.season} Episode: {episode.number}
+      <div className='episodes-layout'>
+        {state.episodes.map((episode: IEpisode) => (
+          <div key={episode.id} className='card'>
+            <img
+              src={episode.image.medium}
+              alt={`Rick and Morty ${episode.name}`}
+            />
+            <div className='p10 flex column'>
+              <div className='card-title'>{episode.name}</div>
+              <div className='card-desc'>
+                Season: {episode.season} Episode: {episode.number}
+              </div>
+              <button type='button' onClick={() => toggleFavAction}>
+                Fav
+              </button>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </Fragment>
   );
 }

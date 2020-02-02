@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.episodes-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 
 .card {
   border-radius: 12px;
