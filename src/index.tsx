@@ -31,11 +31,19 @@ export default function App(): JSX.Element {
     setTodos(newTodos);
   };
 
+  // it will toggle the value of complete
   const completeTodo = (index: number): void => {
-    const newTodos: ITodo[] = todos;
+    const newTodos: ITodo[] = [...todos];
     // check if the todo is completed if it is then do the opposite
     newTodos[index].complete = !newTodos[index].complete;
-    console.log(newTodos);
+    // console.log(newTodos);
+    setTodos(newTodos);
+  };
+
+  const removeTodo = (index: number): void => {
+    const newTodos: ITodo[] = [...todos];
+    newTodos.splice(index, 1);
+    // console.log(newTodos);
     setTodos(newTodos);
   };
 
@@ -56,9 +64,16 @@ export default function App(): JSX.Element {
       <section>
         {todos.map((todo: ITodo, idx: number) => (
           <Fragment key={idx}>
-            <div>{todo.text}</div>
+            <div
+              style={{ textDecoration: todo.complete ? 'line-through' : '' }}
+            >
+              {todo.text}
+            </div>
             <button type='button' onClick={() => completeTodo(idx)}>
               {todo.complete ? 'Incomplete' : 'Complete'}
+            </button>
+            <button type='button' onClick={() => removeTodo(idx)}>
+              &times;
             </button>
           </Fragment>
         ))}
