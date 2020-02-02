@@ -17,5 +17,19 @@
   "bugs": {
     "url": "https://github.com/St3ve89/react-typescript/issues"
   },
-  "homepage": "https://github.com/St3ve89/react-typescript#readme"
+  "homepage": "https://github.com/St3ve89/react-typescript#readme",
+  "dependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "babel-loader": "^8.0.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2"
+  }
 }
