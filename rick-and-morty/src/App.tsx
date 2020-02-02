@@ -1,12 +1,29 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { Store } from './Store';
 
 export default function App() {
-  const store = useContext(Store);
+  const { state, dispatch } = useContext(Store);
+
+  useEffect(() => {
+    state.episodes.length === 0 && fetchDataAction();
+  });
+
+  const fetchDataAction = async () => {
+    const URL =
+      'https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes';
+    const data = await fetch(URL);
+    const res = await data.json();
+
+    return dispatch({
+      type: 'FETCH_DATA',
+      payload: res._embedded.episodes
+    });
+  };
+
+  console.log(state);
+
   return (
     <Fragment>
-      {/* lets test if our data is coming through here */}
-      {console.log(store)}
       <h1>Rick and Morty</h1>
       <p>Pick your favourite episode!</p>
     </Fragment>
