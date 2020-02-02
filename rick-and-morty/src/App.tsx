@@ -21,11 +21,12 @@ export default function App() {
     });
   };
 
-  const toggleFavAction = (episode: IEpisode): IAction =>
-    dispatch({
+  const toggleFavAction = (episode: IEpisode): IAction => {
+    return dispatch({
       type: 'ADD_FAV',
       payload: episode
     });
+  };
 
   console.log(state);
 
@@ -47,7 +48,7 @@ export default function App() {
               <div className='card-desc'>
                 Season: {episode.season} Episode: {episode.number}
               </div>
-              <button type='button' onClick={() => toggleFavAction}>
+              <button type='button' onClick={() => toggleFavAction(episode)}>
                 Fav
               </button>
             </div>

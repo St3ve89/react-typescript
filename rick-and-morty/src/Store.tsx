@@ -13,6 +13,8 @@ function reducer(state: IState, action: IAction): IState {
     case 'FETCH_DATA':
       // get the current state and put the episodes inside
       return { ...state, episodes: action.payload };
+    case 'ADD_FAV':
+      return { ...state, favourites: [...state.favourites, action.payload] };
     default:
       return state;
   }
