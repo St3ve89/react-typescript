@@ -22,10 +22,23 @@ export default function App() {
   };
 
   const toggleFavAction = (episode: IEpisode): IAction => {
-    return dispatch({
+    const episodeInFav = state.favourites.includes(episode);
+
+    let dispatchObj = {
       type: 'ADD_FAV',
       payload: episode
-    });
+    };
+
+    if (episodeInFav) {
+      const filteredEpisode = state.favourites.filter(
+        (fav: IEpisode) => fav.id !== episode.id
+      );
+      dispatchObj = {
+        type: 'REMOVE_FAV',
+        payload: filteredEpisode
+      };
+    }
+    return dispatch(dispatchObj);
   };
 
   console.log(state);
@@ -49,7 +62,9 @@ export default function App() {
                 Season: {episode.season} Episode: {episode.number}
               </div>
               <button type='button' onClick={() => toggleFavAction(episode)}>
-                Fav
+                {state.favourites.find((fav: IEpisode) => fav.id === episode.id)
+                  ? 'Unfav'
+                  : 'Fav'}
               </button>
             </div>
           </div>
